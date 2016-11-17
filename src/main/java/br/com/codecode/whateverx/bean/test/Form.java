@@ -1,4 +1,4 @@
-package br.com.codecode.whateverx.bean;
+package br.com.codecode.whateverx.bean.test;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -9,14 +9,14 @@ import br.com.codecode.whateverx.dao.Crud;
 import br.com.codecode.whateverx.model.User;
 
 @Model
-public class WhateverForm {		
+public class Form {		
 
 	@Inject 
 	private Crud<User> dao;
 	
 	private User user;	
 
-	public WhateverForm(){}
+	public Form(){}
 
 	@PostConstruct
 	private void init(){

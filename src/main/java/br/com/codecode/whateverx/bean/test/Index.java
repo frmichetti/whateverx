@@ -1,4 +1,4 @@
-package br.com.codecode.whateverx.bean;
+package br.com.codecode.whateverx.bean.test;
 
 import java.util.List;
 
@@ -10,14 +10,14 @@ import br.com.codecode.whateverx.dao.Crud;
 import br.com.codecode.whateverx.model.User;
 
 @Model
-public class WhateverIndex {
+public class Index {
 	
 	@Inject 
 	private Crud<User> dao;
 	
 	private List<User> users;
 	
-	public WhateverIndex(){}
+	public Index(){}
 	
 	@PostConstruct
 	private void init(){

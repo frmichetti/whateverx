@@ -10,16 +10,16 @@
 	<h:form>
 		<h:panelGroup>
 			<label for="id">ID</label>
-			<h:inputText value="#{whateverForm.user.id}" readonly="readonly"
+			<h:inputText value="#{form.user.id}" readonly="readonly"
 				id="id" />
 			<label for="uuid">UUID</label>
-			<h:inputText value="#{whateverForm.user.uuid}" readonly="readonly"
+			<h:inputText value="#{form.user.uuid}" readonly="readonly"
 				id="uuid" />
 			<label for="email">Email</label>
-			<h:inputText value="#{whateverForm.user.email}" id="email" />
+			<h:inputText value="#{form.user.email}" id="email" />
 			<label for="password">Password</label>
-			<h:inputText value="#{whateverForm.user.password}" id="password" />
-			<h:commandButton action="#{whateverForm.save()}" value="Save" />
+			<h:inputText value="#{form.user.password}" id="password" />
+			<h:commandButton action="#{form.save()}" value="Save" />
 		</h:panelGroup>
 	</h:form>
 </body>
