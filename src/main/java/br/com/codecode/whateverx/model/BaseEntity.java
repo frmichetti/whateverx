@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.Version;
+
 /**
  * Root SuperClass for Persistence in This Project
  * Every Entity passed to Persist MUST extends this Class

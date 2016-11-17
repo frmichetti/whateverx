@@ -1,9 +1,9 @@
-package br.com.codecode.whateverx.cdi.factory;
+package br.com.codecode.whateverx.cdi.producer;
 
 import java.io.Serializable;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
@@ -19,23 +19,23 @@ public class EntityManagerProducer implements Serializable {
 
 	private static final long serialVersionUID = -1826763804778726145L;
 	
-	@PersistenceUnit(unitName = "WhateverDefaultDS")
-	private EntityManagerFactory emfDefault ;
+	@PersistenceUnit(unitName = "ProductionDS")
+	private EntityManagerFactory emfProduction ;
 	
 	@PersistenceUnit(unitName = "TestDS")
 	private EntityManagerFactory emfTest ;
 
-	@Dependent
+	@RequestScoped
 	@Produces 
-	@Production
-	@Default
-	public EntityManager getDefaultEntityManager() {
-		return emfDefault.createEntityManager();
+	@Production	
+	public EntityManager getProductionEntityManager() {
+		return emfProduction.createEntityManager();
 	}
 	
-	@Dependent
+	@RequestScoped
 	@Produces 
 	@Test
+	@Default
 	public EntityManager getTestEntityManager() {
 		return emfTest.createEntityManager();
 	}

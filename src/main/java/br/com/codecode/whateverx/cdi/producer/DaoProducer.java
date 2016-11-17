@@ -1,4 +1,4 @@
-package br.com.codecode.whateverx.cdi.factory;
+package br.com.codecode.whateverx.cdi.producer;
 
 import java.lang.reflect.ParameterizedType;
 
@@ -9,8 +9,8 @@ import br.com.codecode.whateverx.dao.Dao;
 import br.com.codecode.whateverx.model.BaseEntity;
 
 /**
- * Factory for Generic Dao Injection
- * {@link Dao}
+ * Factory for Generic {@link Dao} Injection
+ * 
  * @author felipe
  *
  */

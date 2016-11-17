@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import br.com.codecode.whateverx.cdi.qualifier.Test;
+import br.com.codecode.whateverx.cdi.qualifier.Production;
 import br.com.codecode.whateverx.model.BaseEntity;
 /**
  * Generic Implementation of {@link Crud}
@@ -21,8 +21,12 @@ public class Dao<T extends BaseEntity> implements Crud<T>, Serializable {
 	private static final long serialVersionUID = 2314421570933641745L;
 
 	private final Class<?> clazz;
-
-	@Inject @Test
+	
+	/**
+	 * May Change for {@link @Production} or {@link @Test} 
+	 * Default is Test
+	 */
+	@Inject @Production
 	private EntityManager em;	
 
 	/**
@@ -38,7 +42,7 @@ public class Dao<T extends BaseEntity> implements Crud<T>, Serializable {
 	}
 
 	@Override
-	public T save(BaseEntity entity) {
+	public T save(T entity) {
 
 		em.persist(entity);
 
