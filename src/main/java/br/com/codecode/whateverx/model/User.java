@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
  
 @Entity
-@NamedQuery(name="findAll", query="SELECT u FROM User u")
+@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User extends BaseEntity{
 
 	private static final long serialVersionUID = 1L;

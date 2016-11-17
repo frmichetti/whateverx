@@ -3,11 +3,9 @@ package br.com.codecode.whateverx.dao;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-import br.com.codecode.whateverx.cdi.qualifier.Production;
 import br.com.codecode.whateverx.model.BaseEntity;
 /**
  * Generic Implementation of {@link Crud}
@@ -15,18 +13,13 @@ import br.com.codecode.whateverx.model.BaseEntity;
  *
  * @param <T>
  */
-@SuppressWarnings({"unchecked","unused"})
+@SuppressWarnings({"unused","unchecked"})
 public class Dao<T extends BaseEntity> implements Crud<T>, Serializable {
 
 	private static final long serialVersionUID = 2314421570933641745L;
+	
+	private Class<?> clazz;	
 
-	private final Class<?> clazz;
-
-	/**
-	 * May Change for {@link @Production} or {@link @Test} 
-	 * Default is Test
-	 */
-	@Inject @Production
 	private EntityManager em;	
 
 	/**
@@ -34,11 +27,13 @@ public class Dao<T extends BaseEntity> implements Crud<T>, Serializable {
 	 *  ---Do not change---
 	 */
 	private Dao() {	
-		this.clazz = (Class<?>) BaseEntity.class;	
+		System.out.println("[CDI] - Dao.Dao()");		
 	}
 
-	public Dao(Class<? extends BaseEntity> clazz) {		
+	public Dao(Class<? extends BaseEntity> clazz, EntityManager em) {
+		System.out.println("[CDI] - Dao.Dao("+clazz.getSimpleName()+")");
 		this.clazz = (Class<T>) clazz;
+		this.em = em;
 	}
 
 	@Override
@@ -67,11 +62,11 @@ public class Dao<T extends BaseEntity> implements Crud<T>, Serializable {
 		return em.merge(entity);
 
 	}
-
+	
 	@Override
 	public List<T> listAll() {
 
-		TypedQuery<?> query = em.createNamedQuery("findAll", clazz);
+		TypedQuery<?> query = em.createNamedQuery(clazz.getSimpleName() + ".findAll", clazz);
 
 		return (List<T>) query.getResultList();
 	}
@@ -98,7 +93,6 @@ public class Dao<T extends BaseEntity> implements Crud<T>, Serializable {
 		}
 
 		return entity;
-
 
 	}
 }

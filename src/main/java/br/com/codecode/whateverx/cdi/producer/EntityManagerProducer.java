@@ -24,16 +24,16 @@ public class EntityManagerProducer implements Serializable {
 	
 	@PersistenceUnit(unitName = "TestDS")
 	private EntityManagerFactory emfTest ;
-
+	
+	@Produces
 	@RequestScoped
-	@Produces 
 	@Production	
 	public EntityManager getProductionEntityManager() {
 		return emfProduction.createEntityManager();
 	}
 	
+	@Produces
 	@RequestScoped
-	@Produces 
 	@Test
 	@Default
 	public EntityManager getTestEntityManager() {

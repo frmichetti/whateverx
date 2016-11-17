@@ -6,13 +6,14 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
+import br.com.codecode.whateverx.cdi.qualifier.Generic;
 import br.com.codecode.whateverx.dao.Crud;
 import br.com.codecode.whateverx.model.User;
 
 @Model
 public class Index {
 	
-	@Inject 
+	@Inject @Generic
 	private Crud<User> dao;
 	
 	private List<User> users;
