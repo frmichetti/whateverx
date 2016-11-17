@@ -1,15 +1,15 @@
 package br.com.codecode.whateverx.dao;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.TypedQuery;
 
 import br.com.codecode.whateverx.model.BaseEntity;
 
+@SuppressWarnings({"unchecked","unused"})
 public class Dao<T extends BaseEntity> implements Crud<T>, Serializable {
 
 	private static final long serialVersionUID = 2314421570933641745L;
@@ -24,17 +24,11 @@ public class Dao<T extends BaseEntity> implements Crud<T>, Serializable {
 	 *  ---Do not change---
 	 */
 	private Dao() {	
-		this.clazz = (Class<?>) getClass();	
+		this.clazz = (Class<?>) BaseEntity.class;	
 	}
 
-	public Dao(Class<? extends BaseEntity> clazz) {
-
-		this.clazz = (Class<?>) clazz;
-
-		System.out.println("Dao.Dao(Class<T>)");
-
-		System.out.println(Arrays.toString(clazz.getTypeParameters()));
-
+	public Dao(Class<? extends BaseEntity> clazz) {		
+		this.clazz = (Class<T>) clazz;
 	}
 
 	@Override
@@ -65,15 +59,11 @@ public class Dao<T extends BaseEntity> implements Crud<T>, Serializable {
 	}
 
 	@Override
-	public List<?> listAll() {
+	public List<T> listAll() {
 
-		CriteriaQuery<?> query = em.getCriteriaBuilder().createQuery(clazz);
+		TypedQuery<?> query = em.createNamedQuery("findAll", clazz);
 
-		query.from(clazz);
-
-		System.out.println("Dao.listAll()");
-
-		return em.createQuery(query).getResultList();
+		return (List<T>) query.getResultList();
 	}
 
 	@Override

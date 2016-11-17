@@ -13,7 +13,7 @@ public interface Crud<T extends Serializable> {
 	
 	public T saveOrUpdate(T entity) throws IllegalArgumentException;
 
-	public List<?> listAll();
+	public List<T> listAll();
 
 	public T findById(Long id);
 }
