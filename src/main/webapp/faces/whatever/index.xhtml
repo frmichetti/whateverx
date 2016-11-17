@@ -14,10 +14,6 @@
 </h:column>
 
 <h:column>
-<h:outputText value="#{w.uuid}" />
-</h:column>
-
-<h:column>
 <h:outputText value="#{w.email}" />
 </h:column>
 
@@ -25,6 +21,17 @@
 <h:outputText value="#{w.password}" />
 </h:column>
 
+<h:column>
+<h:outputText value="#{w.uuid}" />
+</h:column>
+
+<h:column>
+<h:outputText value="#{w.createdAt}" />
+</h:column>
+
+<h:column>
+<h:outputText value="#{w.updatedAt}" />
+</h:column>
 
 </h:dataTable>
 <h:commandButton action="#{index.goToForm()}" value="Go To Form" />

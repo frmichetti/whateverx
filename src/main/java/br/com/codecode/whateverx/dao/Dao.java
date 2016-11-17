@@ -29,9 +29,14 @@ public class Dao<T extends BaseEntity> implements Crud<T>, Serializable {
 	private Dao() {	
 		System.out.println("[CDI] - Dao.Dao()");		
 	}
-
+	/**
+	 * This Constructor is Required for Generify Dao 
+	 * @param clazz
+	 * @param em
+	 */
 	public Dao(Class<? extends BaseEntity> clazz, EntityManager em) {
 		System.out.println("[CDI] - Dao.Dao("+clazz.getSimpleName()+")");
+		System.out.println("[CDI] - EM Hash -> " + em.getClass().hashCode());
 		this.clazz = (Class<T>) clazz;
 		this.em = em;
 	}

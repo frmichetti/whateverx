@@ -1,6 +1,7 @@
 package br.com.codecode.whateverx.model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -9,7 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Version;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Root SuperClass for Persistence in This Project
@@ -27,9 +32,20 @@ public abstract class BaseEntity implements Serializable {
 	@Column(updatable = false, nullable = false)
 	private Long id = 0L;
 
+	@XmlTransient
 	@Version
 	@Column
-	private int version;
+	private int version;	
+	
+	@XmlTransient
+	@Temporal(TemporalType.TIMESTAMP)		
+	@Column(updatable=false,nullable=false)
+	private Date createdAt;
+	
+	@XmlTransient
+	@Temporal(TemporalType.TIMESTAMP)		
+	@Column
+	private Date updatedAt;
 
 	@Column(updatable = false, nullable = false)
 	private String uuid;
@@ -44,59 +60,54 @@ public abstract class BaseEntity implements Serializable {
 		this.id = id;
 	}
 
-	private int getVersion() {
-		return this.version;
+	@PrePersist
+	private void prepareToPersist(){
+		insertTimeStamp();
+		generateUUID();		
+	}
+	
+	private void generateUUID(){
+		uuid = UUID.randomUUID().toString();
+	}
+	
+	private void insertTimeStamp(){
+		createdAt = new Date();
 	}
 
-	private void setVersion(final int version) {
+	@PreUpdate
+	private void updateTimeStamp(){
+		updatedAt = new Date();
+	}
+	
+	private int getVersion() {
+		return version;
+	}
+
+	private void setVersion(int version) {
 		this.version = version;
 	}
 
-	public String getUuid() {		
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	private void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public Date getUpdatedAt() {
+		return updatedAt;
+	}
+
+	private void setUpdatedAt(Date updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public String getUuid() {
 		return uuid;
 	}
 
-	public void setUuid(String uuid) {		
+	private void setUuid(String uuid) {
 		this.uuid = uuid;
-	}
-	
-	@PrePersist
-	private void prePersist(){
-		setUuid(UUID.randomUUID().toString());
-	}
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (!(obj instanceof BaseEntity)) {
-			return false;
-		}
-		BaseEntity other = (BaseEntity) obj;
-		if (id != null) {
-			if (!id.equals(other.id)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-
-	@Override
-	public String toString() {
-		String result = getClass().getSimpleName() + " ";
-		if (uuid != null && !uuid.trim().isEmpty())
-			result += "uuid: " + uuid;
-		return result;
 	}
 }
