@@ -13,7 +13,7 @@ public class Form {
 
 	@Inject 
 	private Crud<User> dao;
-	
+
 	private User user;	
 
 	public Form(){}
@@ -22,7 +22,7 @@ public class Form {
 	private void init(){
 		user = new User();
 	}
-	
+
 	public User getUser() {
 		return user;
 	}
@@ -33,9 +33,13 @@ public class Form {
 		System.out.println("WhateverForm.save()");
 
 		if(user != null)		
-			dao.save(user);							
+			dao.saveOrUpdate(user);							
 		else
 			throw new IllegalArgumentException("Whatever Entity Could not be Null");
+	}
+
+	public String goToIndex(){
+		return "index.xhtml?faces-redirect=true";
 	}
 
 

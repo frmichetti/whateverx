@@ -21,7 +21,7 @@ public class Dao<T extends BaseEntity> implements Crud<T>, Serializable {
 	private static final long serialVersionUID = 2314421570933641745L;
 
 	private final Class<?> clazz;
-	
+
 	/**
 	 * May Change for {@link @Production} or {@link @Test} 
 	 * Default is Test
@@ -87,14 +87,14 @@ public class Dao<T extends BaseEntity> implements Crud<T>, Serializable {
 	@Override
 	public T saveOrUpdate(T entity) {
 
-		if ((entity.getId() == null) || (entity.getId() < 1)){
+		if ((entity.getId() == null) || (entity.getId() < 0)){
 			throw new IllegalArgumentException("Unexpected Id");
 		}
 
 		if(entity.getId() == 0L){
-			em.persist(entity);
+			save(entity);
 		}else{
-			em.merge(entity);
+			update(entity);
 		}
 
 		return entity;

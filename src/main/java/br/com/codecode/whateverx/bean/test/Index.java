@@ -28,6 +28,10 @@ public class Index {
 		return users;
 	}
 	
+	public String goToForm(){
+		return "form.xhtml?faces-redirect=true";
+	}
+	
 	
 
 }
