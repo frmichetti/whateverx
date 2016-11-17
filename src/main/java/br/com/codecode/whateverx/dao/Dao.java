@@ -3,12 +3,18 @@ package br.com.codecode.whateverx.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import br.com.codecode.whateverx.cdi.qualifier.Test;
 import br.com.codecode.whateverx.model.BaseEntity;
-
+/**
+ * Generic Implementation of {@link Crud}
+ * @author felipe
+ *
+ * @param <T>
+ */
 @SuppressWarnings({"unchecked","unused"})
 public class Dao<T extends BaseEntity> implements Crud<T>, Serializable {
 
@@ -16,7 +22,7 @@ public class Dao<T extends BaseEntity> implements Crud<T>, Serializable {
 
 	private final Class<?> clazz;
 
-	@PersistenceContext
+	@Inject @Test
 	private EntityManager em;	
 
 	/**

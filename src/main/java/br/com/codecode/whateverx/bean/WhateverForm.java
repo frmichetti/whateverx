@@ -1,7 +1,5 @@
 package br.com.codecode.whateverx.bean;
 
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;

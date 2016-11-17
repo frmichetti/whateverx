@@ -8,15 +8,22 @@ import javax.enterprise.inject.spi.InjectionPoint;
 import br.com.codecode.whateverx.dao.Dao;
 import br.com.codecode.whateverx.model.BaseEntity;
 
-public class DaoFactory {	
+/**
+ * Factory for Generic Dao Injection
+ * {@link Dao}
+ * @author felipe
+ *
+ */
+@SuppressWarnings("unchecked")
+public class DaoProducer {	
 	
 	@Produces	
-	public Dao<BaseEntity> create(InjectionPoint injectionPoint) {		
+	public Dao<BaseEntity> getDao(InjectionPoint injectionPoint) {		
 
 		ParameterizedType type = (ParameterizedType) injectionPoint.getType();
 
 		Class<?> clazz = (Class<?>) type.getActualTypeArguments()[0];		
 
-		return new Dao(clazz);
+		return new Dao<BaseEntity>((Class<? extends BaseEntity>) clazz);
 	}
 }
