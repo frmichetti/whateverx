@@ -6,9 +6,21 @@
 
 <h:head></h:head>
 <body>
+
 	<h:form>
-		<input value="#{whateverForm.whatever.test}"/>
-		<h:commandButton action="#{whateverForm.save()}" value="Salvar" />
+		<h:panelGroup>
+			<label for="id">ID</label>
+			<h:inputText value="#{whateverForm.user.id}" readonly="readonly"
+				id="id" />
+			<label for="uuid">UUID</label>
+			<h:inputText value="#{whateverForm.user.uuid}" readonly="readonly"
+				id="uuid" />
+			<label for="email">Email</label>
+			<h:inputText value="#{whateverForm.user.email}" id="email" />
+			<label for="password">Password</label>
+			<h:inputText value="#{whateverForm.user.password}" id="password" />
+			<h:commandButton action="#{whateverForm.save()}" value="Save" />
+		</h:panelGroup>
 	</h:form>
 </body>
 </html>

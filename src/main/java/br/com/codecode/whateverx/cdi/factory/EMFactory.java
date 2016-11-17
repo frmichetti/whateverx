@@ -1,4 +1,4 @@
-package br.com.codecode.whateverx.dao;
+package br.com.codecode.whateverx.cdi.factory;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Disposes;

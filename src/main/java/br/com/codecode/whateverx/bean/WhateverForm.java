@@ -1,20 +1,25 @@
 package br.com.codecode.whateverx.bean;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.transaction.Transactional;
 
-import br.com.codecode.whateverx.dao.Dao;
-import br.com.codecode.whateverx.model.Whatever;
+import br.com.codecode.whateverx.dao.Crud;
+import br.com.codecode.whateverx.model.User;
 
 @Named
-public class WhateverForm {	
-	
-	@Inject
-	private Dao<Whatever> dao ;
+public class WhateverForm {		
 
-	private Whatever whatever = new Whatever();
+	@Inject 
+	private Crud<User> dao ;
+
+	private User user = new User();
+
+	private List<User> users;
 
 	public WhateverForm(){}
 
@@ -23,15 +28,27 @@ public class WhateverForm {
 
 	@Transactional
 	public void save(){
-		if(whatever!= null)
-			dao.save(whatever);
+
+		System.out.println("WhateverForm.save()");
+
+		if(user != null)
+		{
+			System.out.println("Prepare to Save");		
+
+			System.out.println(dao.save(user).getUuid());		
+
+			System.out.println("Dao Type Parameter : "  + Arrays.toString(dao.getClass().getTypeParameters()));
+		}			
 		else
 			throw new IllegalArgumentException("Whatever Entity Could not be Null");
 	}
 
-	public Whatever getWhatever() {
-		return whatever;
+	public User getUser() {
+		return user;
 	}
 
+	public List<User> getUsers() {
+		return users;
+	}
 
 }

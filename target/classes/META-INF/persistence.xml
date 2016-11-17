@@ -4,6 +4,8 @@
     <description>Forge Persistence Unit</description>
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <jta-data-source>java:/WhateverDefaultDS</jta-data-source>
+    <class>br.com.codecode.whateverx.model.BaseEntity</class>
+    <class>br.com.codecode.whateverx.model.User</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="hibernate.hbm2ddl.auto" value="create-drop"/>

@@ -1,31 +1,34 @@
 package br.com.codecode.whateverx.model;
 
-import javax.persistence.Entity;
 import java.io.Serializable;
-import javax.persistence.Id;
+import java.util.UUID;
+
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
 import javax.persistence.Version;
 
-@Entity
-public class Whatever implements Serializable {
+@MappedSuperclass
+public abstract class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(updatable = false, nullable = false)
 	private Long id = 0L;
-	
+
 	@Version
 	@Column
 	private int version;
 
-	@Column
-	private String test;
-	
-	public Whatever(){}
+	@Column(updatable = false, nullable = false)
+	private String uuid;
+
+	public BaseEntity(){}
 
 	public Long getId() {
 		return this.id;
@@ -35,23 +38,37 @@ public class Whatever implements Serializable {
 		this.id = id;
 	}
 
-	public int getVersion() {
+	private int getVersion() {
 		return this.version;
 	}
 
-	public void setVersion(final int version) {
+	private void setVersion(final int version) {
 		this.version = version;
 	}
+
+	public String getUuid() {		
+		return uuid;
+	}
+
+	public void setUuid(String uuid) {		
+		this.uuid = uuid;
+	}
+	
+	@PrePersist
+	private void prePersist(){
+		setUuid(UUID.randomUUID().toString());
+	}
+
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof Whatever)) {
+		if (!(obj instanceof BaseEntity)) {
 			return false;
 		}
-		Whatever other = (Whatever) obj;
+		BaseEntity other = (BaseEntity) obj;
 		if (id != null) {
 			if (!id.equals(other.id)) {
 				return false;
@@ -68,19 +85,12 @@ public class Whatever implements Serializable {
 		return result;
 	}
 
-	public String getTest() {
-		return test;
-	}
-
-	public void setTest(String test) {
-		this.test = test;
-	}
 
 	@Override
 	public String toString() {
 		String result = getClass().getSimpleName() + " ";
-		if (test != null && !test.trim().isEmpty())
-			result += "test: " + test;
+		if (uuid != null && !uuid.trim().isEmpty())
+			result += "uuid: " + uuid;
 		return result;
 	}
 }
