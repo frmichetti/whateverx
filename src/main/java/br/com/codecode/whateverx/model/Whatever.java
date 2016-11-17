@@ -12,16 +12,20 @@ import javax.persistence.Version;
 public class Whatever implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id", updatable = false, nullable = false)
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(updatable = false, nullable = false)
+	private Long id = 0L;
+	
 	@Version
-	@Column(name = "version")
+	@Column
 	private int version;
 
 	@Column
 	private String test;
+	
+	public Whatever(){}
 
 	public Long getId() {
 		return this.id;
