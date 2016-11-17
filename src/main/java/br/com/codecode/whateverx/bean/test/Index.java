@@ -8,25 +8,25 @@ import javax.inject.Inject;
 
 import br.com.codecode.whateverx.cdi.qualifier.Generic;
 import br.com.codecode.whateverx.dao.Crud;
-import br.com.codecode.whateverx.model.User;
+import br.com.codecode.whateverx.model.Sample;
 
 @Model
 public class Index {
 	
 	@Inject @Generic
-	private Crud<User> dao;
+	private Crud<Sample> dao;
 	
-	private List<User> users;
+	private List<Sample> samples;
 	
 	public Index(){}
 	
 	@PostConstruct
 	private void init(){
-		users = dao.listAll();
+		samples = dao.listAll();
 	}
 
-	public List<User> getUsers() {
-		return users;
+	public List<Sample> getUsers() {
+		return samples;
 	}
 	
 	public String goToForm(){

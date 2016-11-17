@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
  
 @Entity
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
-public class User extends BaseEntity{
+@NamedQuery(name="Sample.findAll", query="SELECT s FROM Sample s")
+public class Sample extends BaseEntity{
 
 	private static final long serialVersionUID = 1L;
 
@@ -15,16 +15,18 @@ public class User extends BaseEntity{
 
 	@Column
 	private String password;	
+	
+	public Sample(){}
 
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
 		}
-		if (!(obj instanceof User)) {
+		if (!(obj instanceof Sample)) {
 			return false;
 		}
-		User other = (User) obj;
+		Sample other = (Sample) obj;
 		if (getId() != null) {
 			if (!getId().equals(other.getId())) {
 				return false;

@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  */
 @MappedSuperclass
+@SuppressWarnings("unused")
 public abstract class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -79,10 +80,10 @@ public abstract class BaseEntity implements Serializable {
 		updatedAt = new Date();
 	}
 	
-	private int getVersion() {
+	public int getVersion() {
 		return version;
 	}
-
+	
 	private void setVersion(int version) {
 		this.version = version;
 	}

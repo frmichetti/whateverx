@@ -7,25 +7,25 @@ import javax.transaction.Transactional;
 
 import br.com.codecode.whateverx.cdi.qualifier.Generic;
 import br.com.codecode.whateverx.dao.Crud;
-import br.com.codecode.whateverx.model.User;
+import br.com.codecode.whateverx.model.Sample;
 
 @Model
 public class Form {		
 
 	@Inject @Generic
-	private Crud<User> dao;
+	private Crud<Sample> dao;
 
-	private User user;	
+	private Sample sample;	
 
 	public Form(){}
 
 	@PostConstruct
 	private void init(){
-		user = new User();
+		sample = new Sample();
 	}
 
-	public User getUser() {
-		return user;
+	public Sample getUser() {
+		return sample;
 	}
 
 	@Transactional
@@ -33,8 +33,8 @@ public class Form {
 
 		System.out.println("WhateverForm.save()");
 
-		if(user != null)		
-			dao.saveOrUpdate(user);							
+		if(sample != null)		
+			dao.saveOrUpdate(sample);							
 		else
 			throw new IllegalArgumentException("Whatever Entity Could not be Null");
 	}

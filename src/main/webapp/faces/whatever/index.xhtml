@@ -1,40 +1,51 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
 
-<h:head></h:head> 
-<body> 
-<h:form>
-<h:dataTable value="#{index.users}" var="w">
+<h:head></h:head>
+<body>
+	<h:form>
+		<h:dataTable value="#{index.users}" var="w">
 
-<h:column>
-<h:outputText value="#{w.id}" />
-</h:column>
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+				<h:outputText value="#{w.id}" />
+			</h:column>
 
-<h:column>
-<h:outputText value="#{w.email}" />
-</h:column>
+			<h:column>
+				<f:facet name="header">Email</f:facet>
+				<h:outputText value="#{w.email}" />
+			</h:column>
 
-<h:column>
-<h:outputText value="#{w.password}" />
-</h:column>
+			<h:column>
+				<f:facet name="header">Password</f:facet>
+				<h:outputText value="#{w.password}" />
+			</h:column>
 
-<h:column>
-<h:outputText value="#{w.uuid}" />
-</h:column>
+			<h:column>
+				<f:facet name="header">UUID</f:facet>
+				<h:outputText value="#{w.uuid}" />
+			</h:column>
 
-<h:column>
-<h:outputText value="#{w.createdAt}" />
-</h:column>
+			<h:column>
+				<f:facet name="header">Created At</f:facet>
+				<h:outputText value="#{w.createdAt}" />
+			</h:column>
 
-<h:column>
-<h:outputText value="#{w.updatedAt}" />
-</h:column>
+			<h:column>
+				<f:facet name="header">Updated At</f:facet>
+				<h:outputText value="#{w.updatedAt}" />
+			</h:column>
 
-</h:dataTable>
-<h:commandButton action="#{index.goToForm()}" value="Go To Form" />
-</h:form>
-</body> 
+			<h:column>
+				<f:facet name="header">Version</f:facet>
+				<h:outputText value="#{w.version}" />
+			</h:column>
+
+		</h:dataTable>
+		<h:commandButton action="#{index.goToForm()}" value="Go To Form" />
+	</h:form>
+</body>
 </html>
