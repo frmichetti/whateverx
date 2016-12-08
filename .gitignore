@@ -3,4 +3,5 @@
 .classpath
 .settings
 .idea
+.tern-project
 whatever-x.iml
